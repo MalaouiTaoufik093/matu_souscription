@@ -1,8 +1,11 @@
+
 import axios from 'axios'
 import { API_BASE_URL } from 'configs/AppConfig'
 import history from '../history'
 import { AUTH_TOKEN } from 'redux/constants/Auth'
 import { notification } from 'antd';
+
+import AuthService from "services/auth.service";
 
 const service = axios.create({
   baseURL: API_BASE_URL,
@@ -16,10 +19,16 @@ const PUBLIC_REQUEST_KEY = 'public-request'
 
 // API Request interceptor
 service.interceptors.request.use(config => {
-	const jwtToken = localStorage.getItem(AUTH_TOKEN)
+	//const jwtToken = localStorage.getItem(AUTH_TOKEN)
+
+	const currentUser = AuthService.getCurrentUser();
+	const jwtToken = currentUser.accessToken
+	console.log("jwtToken : "+ jwtToken)
 	
   if (jwtToken) {
     config.headers[TOKEN_PAYLOAD_KEY] = jwtToken
+	
+	console.log("config.headers[TOKEN_PAYLOAD_KEY] = jwtToken"+ config.headers[TOKEN_PAYLOAD_KEY] )
   }
 
   if (!jwtToken && !config.headers[PUBLIC_REQUEST_KEY]) {
@@ -38,7 +47,10 @@ service.interceptors.request.use(config => {
 
 // API respone interceptor
 service.interceptors.response.use( (response) => {
+	console.log("response.data"+ response.data)
 	return response.data
+	
+	
 }, (error) => {
 
 	let notificationParam = {

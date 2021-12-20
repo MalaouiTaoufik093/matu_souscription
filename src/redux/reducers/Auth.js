@@ -1,6 +1,7 @@
 import {
 	AUTH_TOKEN,
 	AUTHENTICATED,
+	USERNAME,
 	SHOW_AUTH_MESSAGE,
 	HIDE_AUTH_MESSAGE,
 	SIGNOUT_SUCCESS,
@@ -10,12 +11,15 @@ import {
   SIGNIN_WITH_FACEBOOK_AUTHENTICATED
 } from '../constants/Auth';
 
+import AuthService from "services/auth.service";
+
 const initState = {
   loading: false,
   message: '',
   showMessage: false,
   redirect: '',
   token: localStorage.getItem(AUTH_TOKEN),
+  username: '',
 }
 
 const auth = (state = initState, action) => {
@@ -25,7 +29,8 @@ const auth = (state = initState, action) => {
 				...state,
 				loading: false,
 				redirect: '/',
-				token: action.token
+				token: action.token,
+				username: action.username
 			}
 		case SHOW_AUTH_MESSAGE: 
 			return {

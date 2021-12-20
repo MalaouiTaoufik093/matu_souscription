@@ -27,9 +27,9 @@ const getLogo = (props) => {
   const { navCollapsed, logoType } = props;
   if(logoType === 'light') {
     if(navCollapsed) {
-      return '/img/logo-sm-white.png'
+      return '/img/logo_mini.jpg'
     }
-    return '/img/logo-white.png'
+    return '/img/logo_matu2.png'
   }
 
   if (navCollapsed) {

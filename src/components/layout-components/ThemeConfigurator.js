@@ -101,7 +101,7 @@ export const ThemeConfigurator = ({
 				{
 					isNavTop ?
 					<ListOption 
-						name="Top Nav Color:"
+						name="Top Nav Color "
 						vertical
 						selector={
 							<ColorPicker color={topNavColor} colorChange={ontopNavColorClick}/>
@@ -109,7 +109,7 @@ export const ThemeConfigurator = ({
 					/>
 					:
 					<ListOption 
-						name="Header Nav Color:"
+						name="Changer la Couleur de l'Entête "
 						vertical
 						selector={
 							<ColorPicker color={headerNavColor} colorChange={onHeaderNavColorClick}/>
@@ -118,20 +118,20 @@ export const ThemeConfigurator = ({
 				}
 				
 				<ListOption 
-					name="Navigation Type:"
+					name="changer le type de menu "
 					selector={
 						<Radio.Group 
 							size="small" 
 							onChange={e => onNavTypeClick(e.target.value)} 
 							value={navType}
 						>
-							<Radio.Button value={NAV_TYPE_SIDE}>Side</Radio.Button>
-							<Radio.Button value={NAV_TYPE_TOP}>Top</Radio.Button>
+							<Radio.Button value={NAV_TYPE_SIDE}>Gauche</Radio.Button>
+							<Radio.Button value={NAV_TYPE_TOP}>Haut</Radio.Button>
 						</Radio.Group>
 					}
 				/>
 				<ListOption 
-					name="Side Nav Color:"
+					name="Changer la couleur de Side "
 					selector={
 						<Radio.Group
 							disabled={isNavTop}
@@ -139,14 +139,14 @@ export const ThemeConfigurator = ({
 							onChange={e => onNavStyleChange(e.target.value)} 
 							value={sideNavTheme}
 						>
-							<Radio.Button value={SIDE_NAV_LIGHT}>Light</Radio.Button>
-							<Radio.Button value={SIDE_NAV_DARK}>Dark</Radio.Button>
+							<Radio.Button value={SIDE_NAV_LIGHT}>Blanche</Radio.Button>
+							<Radio.Button value={SIDE_NAV_DARK}>Noire</Radio.Button>
 						</Radio.Group>
 					}
 					disabled={isNavTop}
 				/>
 				<ListOption 
-					name="Side Nav Collapse:"
+					name="Réduire le side bar "
 					selector={
 						<Switch 
 							disabled={isNavTop} 
@@ -157,13 +157,13 @@ export const ThemeConfigurator = ({
 					disabled={isNavTop}
 				/>
 				<ListOption 
-					name="Dark Theme:"
+					name="Changer le théme "
 					selector={
 						<Switch checked={currentTheme === 'dark'} onChange={toggleTheme} />
 					}
 				/>
 				<ListOption 
-					name="Direction:"
+					name="Direction "
 					selector={
 						<Radio.Group
 							size="small" 
@@ -176,25 +176,7 @@ export const ThemeConfigurator = ({
 					}
 				/>
 			</div>
-			<div className="mb-5">
-				<h4 className="mb-3 font-weight-bold">Locale</h4>
-				<ListOption 
-					name="Language:"
-					selector={
-						<NavLanguage configDisplay/>
-					}
-				/>
-			</div>
-			<div>
-				<CopyToClipboard
-					text={genCopySettingJson({ navType, sideNavTheme, navCollapsed, topNavColor, headerNavColor, locale, currentTheme, direction})}
-					onCopy={() => message.success('Copy Success, please paste it to src/configs/AppConfig.js THEME_CONFIG variable.') }
-				>
-					<Button icon={<CopyOutlined /> } block>
-						<span>Copy Setting</span>
-					</Button>
-				</CopyToClipboard>
-			</div>
+			
 		</>
 	)
 }

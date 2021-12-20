@@ -89,7 +89,7 @@ export const HeaderNav = props => {
           </div>
           <div className="nav-right">
             <NavNotification />
-            <NavLanguage />
+           
             <NavProfile />
             <NavPanel direction={direction} />
           </div>

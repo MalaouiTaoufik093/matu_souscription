@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { Button, Form, Input, Divider, Alert } from "antd";
@@ -15,7 +12,7 @@ import {
 	hideAuthMessage,
 	signInWithGoogle,
 	signInWithFacebook,
-	authenticated
+	authenticated,
 } from 'redux/actions/Auth';
 import JwtAuthService from 'services/JwtAuthService'
 import AuthService from "services/auth.service";
@@ -39,18 +36,17 @@ export const LoginForm_old = props => {
 		showForgetPassword,
 		hideAuthMessage,
 		onForgetPasswordClick,
-		showLoading,
-		signInWithGoogle,
-		signInWithFacebook,
 		extra,
 		signIn,
 		token,
+		username,
 		loading,
 		redirect,
 		showMessage,
 		message,
 		allowRedirect,
 		authenticated,
+		
 	} = props
  
   
@@ -61,12 +57,12 @@ export const LoginForm_old = props => {
 
 
 
-	const [username, setUsername] = useState("");
+	const [username_, setUsername_] = useState("");
 	const [password, setPassword] = useState("");
 
 	const onChangeUsername = (e) => {
-		const username = e.target.value;
-		setUsername(username);
+		const username_ = e.target.value;
+		setUsername_(username_);
 	};
 
 	const onChangePassword = (e) => {
@@ -78,11 +74,12 @@ export const LoginForm_old = props => {
 	
 
 	  const onLogin = () => {
-		AuthService.login(username, password).then(
+		AuthService.login(username_, password).then(
 			(res) => {
 			  const currentUser = AuthService.getCurrentUser();
 			  console.log("user name : " + currentUser.username + "\nEmail : " + currentUser.email + "\nToken : " + currentUser.accessToken )
-			  authenticated(currentUser.accessToken)
+			  authenticated(currentUser.accessToken,currentUser.username)
+			  
 			},
 			(error) => {
 			  const resMessage =
@@ -106,8 +103,8 @@ export const LoginForm_old = props => {
 
 	useEffect(() => {
 		// loading, message, showMessage, token, redirect  (Data Store) 
-		console.log("useeffect  : message est : "+ message)
-		console.log("useeffect  : showMessage est : "+ showMessage)
+		console.log("my username  comming in store   : " + username )
+		console.log("my token  comming in store    : " + token )
 		
 		if (token !== null && allowRedirect) {
 			history.push(redirect)
@@ -147,7 +144,7 @@ export const LoginForm_old = props => {
 						// }
 					]}>
 					<Input prefix={<MailOutlined className="text-primary" />} 
-					value={username}
+					value={username_}
 					onChange={onChangeUsername}/>
 				</Form.Item>
 				<Form.Item
@@ -194,8 +191,8 @@ export const LoginForm_old = props => {
 
 
 const mapStateToProps = ({ auth }) => {
-	const { loading, message, showMessage, token, redirect } = auth;
-	return { loading, message, showMessage, token, redirect }
+	const { loading, message, showMessage, token, redirect,username } = auth;
+	return { loading, message, showMessage, token, redirect,username }
 }
 
 const mapDispatchToProps = {
@@ -205,7 +202,7 @@ const mapDispatchToProps = {
 	hideAuthMessage,
 	signInWithGoogle,
 	signInWithFacebook,
-	authenticated
+	authenticated,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm_old)

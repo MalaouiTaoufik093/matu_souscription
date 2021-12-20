@@ -19,6 +19,7 @@ function RouteInterceptor({ children, isAuthenticated, ...rest }) {
         ) : (
           <Redirect
             to={{
+              
               pathname: AUTH_PREFIX_PATH,
               state: { from: location }
             }}

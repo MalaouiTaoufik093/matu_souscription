@@ -1,6 +1,7 @@
 import {
   SIGNIN,
   AUTHENTICATED,
+  USERNAME,
   SIGNOUT,
   SIGNOUT_SUCCESS,
   SHOW_AUTH_MESSAGE,
@@ -21,20 +22,30 @@ export const signIn = (user) => {
   }
 };
 
-export const authenticated = (token) => {
+export const authenticated = (token,username) => {
   return {
     type: AUTHENTICATED,
-    token
+    token,
+    username
   }
 };
 
+// export const username = (username) => {
+//   return {
+//     type: USERNAME,
+//     username
+//   }
+// };
+
 export const signOut = () => {
+  console.log("SIGNOUT ACTION ")
   return {
     type: SIGNOUT
   };
 };
 
 export const signOutSuccess = () => {
+  console.log("SIGNOUT_SUCCESS")
   return {
     type: SIGNOUT_SUCCESS,
   }

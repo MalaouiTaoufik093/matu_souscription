@@ -1,5 +1,6 @@
 export const SIGNIN = 'SIGNIN'; 
 export const AUTHENTICATED = 'AUTHENTICATED';
+// export const USERNAME = 'USERNAME';
 export const SIGNOUT = 'SIGNOUT';
 export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS'
 export const SIGNUP = 'SIGNUP';

@@ -29,7 +29,7 @@ export class NavPanel extends Component {
           </Menu.Item>
         </Menu>
         <Drawer
-          title="Theme Config"
+          title="Configuation du Theme"
           placement={this.props.direction === DIR_RTL ? 'left' : 'right'} 
           width={350}
           onClose={this.onClose}
